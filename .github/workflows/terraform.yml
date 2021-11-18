@@ -29,6 +29,7 @@ jobs:
       with:
         url: ${{ secrets.VAULT_ADDR }}
         token: ${{ secrets.VAULT_TOKEN }}
+        tlsSkipVerify : true
 #        method: approle
 #        roleId: ${{ secrets.VAULT_ROLE_ID }}
 #        secretId: ${{ secrets.VAULT_SECRET_ID }}
