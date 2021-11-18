@@ -1,3 +1,2 @@
 .terraform*
 *.tfstate*
-AWS_Provider_config.tf
