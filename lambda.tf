@@ -4,12 +4,12 @@
 # to deploy: run `terraform apply`
 
 variable "aws_region" {
-  default = "us-west-2"
+  default = "ap-southeast-2"
 }
 
-provider "aws" {
-  region          = "${var.aws_region}"
-}
+#provider "aws" {
+#  region          = "${var.aws_region}"
+#}
 
 data "archive_file" "lambda_zip" {
     type          = "zip"
@@ -28,7 +28,6 @@ resource "aws_lambda_function" "test_lambda" {
 
 resource "aws_iam_role" "iam_for_lambda_tf" {
   name = "iam_for_lambda_tf"
-
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -42,4 +41,6 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
       "Sid": ""
     }
   ]
+}
+EOF
 }
