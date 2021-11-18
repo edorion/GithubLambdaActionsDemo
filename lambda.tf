@@ -3,14 +3,6 @@
 # to test: run `terraform plan`
 # to deploy: run `terraform apply`
 
-variable "aws_region" {
-  default = "ap-southeast-2"
-}
-
-#provider "aws" {
-#  region          = "${var.aws_region}"
-#}
-
 data "archive_file" "lambda_zip" {
   type        = "zip"
   source_file = "lambda_handler.py"

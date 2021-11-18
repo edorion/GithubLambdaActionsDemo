@@ -41,12 +41,20 @@ vault write auth/approle/role/githubActions secret_id_ttl=86400 token_num_uses=1
 
 - get role and secret id and store then im repo secrets along with the vault address names as:
 VAULT_ADDR
-VAULT_NAMESPACE
 VAULT_ROLE_ID
 VAULT_SECRET_ID
 VAULTCA (if you created your own)
+GITHUB_TOKEN  (.... I dont know if this is magic'd there or not yet)
 
 ```
 vault read auth/approle/role/githubActions/role-id
 vault write -f auth/approle/role/githubActions/secret-id
 ```
+
+
+- Setup AWS auth in Vault
+
+
+
+With thanks to:
+https://github.com/joatmon08/infrastructure-pipeline
