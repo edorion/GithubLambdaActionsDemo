@@ -13,7 +13,7 @@ provider "aws" {
 
 data "archive_file" "lambda_zip" {
     type          = "zip"
-    source_file   = "index.py"
+    source_file   = "lambda_handler.py"
     output_path   = "lambda_function.zip"
 }
 
@@ -42,6 +42,4 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
       "Sid": ""
     }
   ]
-}
-EOF
 }
