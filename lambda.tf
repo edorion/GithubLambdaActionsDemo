@@ -20,7 +20,7 @@ resource "aws_lambda_function" "test_lambda" {
 
   environment {
     variables = {
-      VAULT_ADDR          = var.TF_VAR_VAULT_ADDR,
+      VAULT_ADDR          = var.VAULT_ADDR,
       VAULT_AUTH_PROVIDER = "aws",
       VAULT_AUTH_ROLE     = "vault-lambda-role",
       VAULT_SECRET_PATH   = "pipeline/lambda/data",

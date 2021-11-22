@@ -67,7 +67,6 @@ jobs:
       id: plan
       if: github.event_name == 'pull_request'
       env:
-        TF_VAR_VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: terraform plan -var-file=prod.tfvars -no-color
       continue-on-error: true
