@@ -101,5 +101,5 @@ jobs:
       env:
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
         TF_VAR_VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-      run: terraform import aws_iam_role.iam_for_lambda_tf iam_for_lambda_tf; terraform import aws_lambda_function.test_lambda test_lambda; terraform apply -auto-approve -var-file=prod.tfvars
+      run: terraform import aws_iam_role.iam_for_lambda_tf iam_for_lambda_tf; terraform import aws_lambda_function.test_lambda lambda_handler; terraform apply -auto-approve -var-file=prod.tfvars
       #run: echo $VAULT_ADDR
