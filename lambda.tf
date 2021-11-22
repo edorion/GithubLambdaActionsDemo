@@ -24,7 +24,8 @@ resource "aws_lambda_function" "test_lambda" {
       VAULT_AUTH_PROVIDER = "aws",
       VAULT_AUTH_ROLE     = "vault-lambda-role",
       VAULT_SECRET_PATH   = "pipeline/lambda/data",
-      VAULT_SECRET_FILE   = "/tmp/vault_secret.json"
+      VAULT_SECRET_FILE   = "/tmp/vault_secret.json",
+      VAULT_SKIP_VERIFY   = "true"
     }
   }
 }
