@@ -20,7 +20,7 @@ resource "aws_lambda_function" "test_lambda" {
 
   environment {
     variables = {
-      VAULT_ADDR          = var.VAULT_ADDR,
+      VAULT_ADDR          = var.TF_VAR_VAULT_ADDR,
       VAULT_AUTH_PROVIDER = "aws",
       VAULT_AUTH_ROLE     = "vault-lambda-role",
       VAULT_SECRET_PATH   = "pipeline/lambda/data",
@@ -49,9 +49,8 @@ EOF
 }
 
 data "aws_lambda_invocation" "lambda_handler" {
-  function_name = aws_lambda_function.lambda_handler.function_name
-
-  input = <<JSON
+  function_name = aws_lambda_function.test_lambda.function_name
+  input         = <<JSON
 {
   "key1": "value1",
   "key2": "value2"
@@ -60,5 +59,5 @@ JSON
 }
 
 output "result_entry" {
-  value = jsondecode(data.aws_lambda_invocation.example.result)
+  value = jsondecode(data.aws_lambda_invocation.lambda_handler.result)
 }
