@@ -1,5 +1,5 @@
 # Simple AWS Lambda Terraform Example
-# requires 'index.js' in the same directory
+# requires 'lambda_handler.py' in the same directory
 # to test: run `terraform plan`
 # to deploy: run `terraform apply`
 
@@ -16,6 +16,17 @@ resource "aws_lambda_function" "test_lambda" {
   handler          = "lambda_handler.lambda_handler"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   runtime          = "python3.8"
+  layers           = ["arn:aws:lambda:${var.aws_region}:634166935893:layer:vault-lambda-extension:6"]
+
+  environment {
+    variables = {
+      VAULT_ADDR          = var.VAULT_ADDR,
+      VAULT_AUTH_PROVIDER = "aws",
+      VAULT_AUTH_ROLE     = "vault-lambda-role",
+      VAULT_SECRET_PATH   = "pipeline/lambda/data",
+      VAULT_SECRET_FILE   = "/tmp/vault_secret.json"
+    }
+  }
 }
 
 resource "aws_iam_role" "iam_for_lambda_tf" {
@@ -35,4 +46,19 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
   ]
 }
 EOF
+}
+
+data "aws_lambda_invocation" "lambda_handler" {
+  function_name = aws_lambda_function.lambda_handler.function_name
+
+  input = <<JSON
+{
+  "key1": "value1",
+  "key2": "value2"
+}
+JSON
+}
+
+output "result_entry" {
+  value = jsondecode(data.aws_lambda_invocation.example.result)
 }

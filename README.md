@@ -54,7 +54,18 @@ vault write -f auth/approle/role/githubActions/secret-id
 
 - Setup AWS auth in Vault
 
+```
+vault auth enable aws
+vault write auth/aws/config/client secret_key=******************* access_key=************
+vault write auth/aws/role/vault-lambda-role \
+    auth_type=iam \
+    bound_iam_principal_arn="${YOUR_ARN}" \
+    policies="github" \
+    ttl=100h
+```
 
 
 With thanks to:
 https://github.com/joatmon08/infrastructure-pipeline
+https://github.com/hashicorp/vault-lambda-extension
+https://github.com/hashicorp/vault-guides/tree/master/ecosystem/vault-lambda-extension
