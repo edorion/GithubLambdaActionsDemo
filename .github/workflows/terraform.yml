@@ -100,4 +100,6 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+        TF_VAR_VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: terraform apply -auto-approve -var-file=prod.tfvars
+      #run: echo $VAULT_ADDR
