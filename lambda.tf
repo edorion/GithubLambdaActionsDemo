@@ -54,8 +54,10 @@ data "aws_lambda_invocation" "lambda_handler" {
   function_name = aws_lambda_function.test_lambda.function_name
   input         = <<JSON
 {
-  "body": "value1",
-  "key2": "value2"
+  "body": {
+    "key1": "value1",
+    "key2": "value2"
+  }
 }
 JSON
 }
