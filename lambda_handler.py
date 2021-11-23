@@ -16,11 +16,11 @@ def lambda_handler(event, context):
     payload = '{"date":' + date_time + '}"'
 
     http = urllib3.PoolManager()
-    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
+#    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
     #date_update = requests.put("https://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
-    f = open('/tmp/vault_secret.json',)
-    dataChange = json.load(f)
-    f.close()
+#    f = open('/tmp/vault_secret.json',)
+#    dataChange = json.load(f)
+#    f.close()
 
 #re reade datetime kv val
     date_update = http.request('GET', "http://127.0.0.1:8200/v1/pipeline/lambda/data")
@@ -34,6 +34,6 @@ def lambda_handler(event, context):
         'message': message,
         'request_id': data[request_id],
         'dateOld': dataOld['data']['date'],
-        'dataChange': dataChange.status_code,
+#        'dataChange': dataChange.status_code,
         'dateNew': dataNew['data']['date']
     }
