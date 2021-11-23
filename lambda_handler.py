@@ -13,7 +13,7 @@ def lambda_handler(event, context):
 #set current datetime as a kv val
     now = datetime.now()
     payload = '{"date":' + now + '}"'
-    date_update = requests.put("https://127.0.0.1:8200/v1/pipeline/lambda/data", -data = payload)
+    date_update = requests.put("https://127.0.0.1:8200/v1/pipeline/lambda/data", -data=payload)
     f = open('/tmp/vault_secret.json',)
     dataChange = json.load(f)
     f.close()
