@@ -1,4 +1,5 @@
-import json, datetime
+import json
+from datetime import datetime
 from botocore.vendored import requests
 
 def lambda_handler(event, context):
