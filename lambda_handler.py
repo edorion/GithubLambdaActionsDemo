@@ -1,7 +1,7 @@
 import json
 
 def lambda_handler(event, context):
-    body = json.loads(event)
+    body = event['body']
 
     f = open('/tmp/vault_secret.json',)
     data = json.load(f)
