@@ -55,8 +55,7 @@ data "aws_lambda_invocation" "lambda_handler" {
   input         = <<JSON
 {
   "body": {
-    "key1": "value1",
-    "key2": "value2"
+    "message": "I am your father"
   }
 }
 JSON

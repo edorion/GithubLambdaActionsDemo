@@ -14,6 +14,7 @@ vault secrets enable -version=1 -path="pipeline" kv
 vault kv put pipeline/aws/creds secret_key=***************** security_token=******************* access_key=ap-southeast-2
 vault kv put pipeline/terraform/creds token=*******************
 vault kv put pipeline/lambda/data date=null
+
 ```
 
 - Setup Vault policy to access the kv data
@@ -63,6 +64,8 @@ vault write auth/aws/role/vault-lambda-role \
     policies="github" \
     ttl=100h
 ```
+note: YOUR_ARN needs to be the IAM role's arn. so a bit of a fiddle
+
 
 
 With thanks to:
