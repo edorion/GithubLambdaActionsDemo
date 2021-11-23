@@ -2,8 +2,6 @@ import json, urllib3
 from datetime import datetime
 
 def lambda_handler(event, context):
-    vault_addr = "http://127.0.0.1"
-
     message = event['body']['message']
 
     f = open('/tmp/vault_secret.json',)
@@ -12,9 +10,12 @@ def lambda_handler(event, context):
 
 
 #set current datetime as a kv val
+
     now = datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     payload = '{"date":' + date_time + '}"'
+
+    http = urllib3.PoolManager()
     date_update = http.request('PUT', "https://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
     #date_update = requests.put("https://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
     f = open('/tmp/vault_secret.json',)
