@@ -1,4 +1,5 @@
-import json, requests, datetime
+import json, datetime
+from botocore.vendored import requests
 
 def lambda_handler(event, context):
     vault_addr = "http://127.0.0.1"
