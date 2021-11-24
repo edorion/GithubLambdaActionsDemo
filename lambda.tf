@@ -49,6 +49,7 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
 EOF
 }
 
+
 data "aws_lambda_invocation" "lambda_handler" {
   function_name = aws_lambda_function.test_lambda.function_name
   input         = <<JSON
