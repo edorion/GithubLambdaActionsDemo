@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     payload = '{"date":' + date_time + '}"'
 
     http = urllib3.PoolManager()
-    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
+    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", headers={'Content-Type':'application/json'}, data=json.dumps(payload))
     f = open('/tmp/vault_secret.json',)
     dataChange = json.load(f)
     f.close()
