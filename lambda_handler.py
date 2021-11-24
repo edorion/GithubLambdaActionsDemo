@@ -40,6 +40,5 @@ def lambda_handler(event, context):
         'request_id': dataOld['request_id'],
         'dateOld': dataOld['data']['date'],
         'dataChange': dataChange,
-        'date_update': date_update,
         'dateNew': dataNew['data']['date']
     }
