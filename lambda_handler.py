@@ -27,7 +27,7 @@ def lambda_handler(event, context):
     dataNew = json.load(f)
     f.close()
 
-    print(data_update.data)
+    print(date_update.data)
 
     return {
         'statusCode': 200,
