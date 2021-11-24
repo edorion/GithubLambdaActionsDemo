@@ -34,6 +34,6 @@ def lambda_handler(event, context):
         'message': message,
         'request_id': dataOld['request_id'],
         'dateOld': dataOld['data']['date'],
-        'dataChange': dataChange.status_code,
+        'dataChange': dataChange,
         'dateNew': dataNew['data']['date']
     }
