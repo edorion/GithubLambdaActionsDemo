@@ -12,11 +12,10 @@ def lambda_handler(event, context):
 
     now = datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-    payload = '{"date":"' + date_time + '"}"'
+    payload = '{"date":"' + date_time + '"}'
 
     http = urllib3.PoolManager()
-    data=json.dumps(payload)
-    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", body=data, headers={'X-Vault-Request':'true'})
+    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", body=payload, headers={'X-Vault-Request':'true'})
     f = open('/tmp/vault_secret.json',)
     dataChange = json.load(f)
     f.close()
