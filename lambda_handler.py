@@ -16,6 +16,11 @@ def lambda_handler(event, context):
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     payload = '{"date":' + date_time + '}"'
 
+    print("+++++")
+    print(payload)
+    print(message)
+    print("+++++")
+
     http = urllib3.PoolManager()
     data=json.dumps(payload)
     date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data"+data, headers={'Content-Type':'application/json'})
@@ -35,5 +40,6 @@ def lambda_handler(event, context):
         'request_id': dataOld['request_id'],
         'dateOld': dataOld['data']['date'],
         'dataChange': dataChange,
+        'date_update': date_update,
         'dateNew': dataNew['data']['date']
     }
