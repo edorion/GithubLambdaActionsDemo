@@ -26,15 +26,14 @@ def lambda_handler(event, context):
     dataNew = json.load(f)
     f.close()
 
-
     new_date = json.loads(date_update.data.decode('utf8'))
-    print(new_date['data']['date'])
 
     return {
         'statusCode': 200,
         'message': message,
         'initialRequest_id': dataInitial['request_id'],
-        'date1stRead': dataInitial['data']['date'],
-        'date2ndRead': dataChanged['data']['date'],
-        'date3rdRead': dataNew['data']['date']
+        'date1stFileRead': dataInitial['data']['date'],
+        'date2ndFileRead': dataChanged['data']['date'],
+        'date3rdFileRead': dataNew['data']['date'],
+        'dateRequestResponse': new_date['data']['date']
     }
