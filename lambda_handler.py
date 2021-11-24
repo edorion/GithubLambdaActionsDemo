@@ -9,16 +9,14 @@ def lambda_handler(event, context):
     f.close()
 
     print(message)
-    url = f'http://localhost:8200/v1/sys/health'
-    status = urllib.request.urlopen(url).read()
-    print(status)
+
 #set current datetime as a kv val
 
     now = datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     payload = '{"date":' + date_time + '}"'
 
-#    http = urllib3.PoolManager()
+    http = urllib3.PoolManager()
 #    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
     #date_update = requests.put("https://127.0.0.1:8200/v1/pipeline/lambda/data", data=json.dumps(payload))
 #    f = open('/tmp/vault_secret.json',)
@@ -27,11 +25,11 @@ def lambda_handler(event, context):
 
 #re reade datetime kv val
 #    date_update = http.request('GET', "http://127.0.0.1:8200/v1/pipeline/lambda/data")
-#    date_update = http.request('GET', "http://127.0.0.1:8200/v1/sys/health")
+    date_update = http.request('GET', "http://127.0.0.1:8200/v1/sys/health")
     #date_update = requests.get("https://127.0.0.1:8200/v1/pipeline/lambda/data")
-#    f = open('/tmp/vault_secret.json',)
-#    dataNew = json.load(f)
-#    f.close()
+    f = open('/tmp/vault_secret.json',)
+    dataNew = json.load(f)
+    f.close()
 
     return {
         'statusCode': 200,
@@ -39,5 +37,5 @@ def lambda_handler(event, context):
         'request_id': data['request_id'],
         'dateOld': dataOld['data']['date'],
 #        'dataChange': dataChange.status_code,
-#        'dateNew': dataNew['data']['date']
+        'dateNew': dataNew['data']['date']
     }
