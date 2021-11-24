@@ -27,7 +27,7 @@ def lambda_handler(event, context):
     f.close()
 
 
-    new_date = json.load(date_update.data)
+    new_date = date_update.data
     print(new_date['data']['date'])
 
     return {
