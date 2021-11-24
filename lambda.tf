@@ -16,7 +16,7 @@ resource "aws_lambda_function" "test_lambda" {
   handler          = "lambda_handler.lambda_handler"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   runtime          = "python3.8"
-  layers           = ["arn:aws:lambda:${var.aws_region}:634166935893:layer:vault-lambda-extension:11"]
+  layers           = ["arn:aws:lambda:${var.aws_region}:634166935893:layer:vault-lambda-extension"]
 
   environment {
     variables = {
