@@ -8,22 +8,15 @@ def lambda_handler(event, context):
     dataOld = json.load(f)
     f.close()
 
-    print(message)
-
 #set current datetime as a kv val
 
     now = datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     payload = '{"date":"' + date_time + '"}"'
 
-    print("+++++")
-    print(payload)
-    print(message)
-    print("+++++")
-
     http = urllib3.PoolManager()
     data=json.dumps(payload)
-    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", body=payload, headers={'X-Vault-Request':'true'})
+    date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", body=data, headers={'X-Vault-Request':'true'})
     f = open('/tmp/vault_secret.json',)
     dataChange = json.load(f)
     f.close()
@@ -33,6 +26,8 @@ def lambda_handler(event, context):
     f = open('/tmp/vault_secret.json',)
     dataNew = json.load(f)
     f.close()
+
+    print(data_update.data)
 
     return {
         'statusCode': 200,
