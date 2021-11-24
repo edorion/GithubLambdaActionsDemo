@@ -5,7 +5,7 @@ def lambda_handler(event, context):
     message = event['body']['message']
 
     f = open('/tmp/vault_secret.json',)
-    dataOld = json.load(f)
+    dataInitial = json.load(f)
     f.close()
 
 #set current datetime as a kv val
@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     http = urllib3.PoolManager()
     date_update = http.request('PUT', "http://127.0.0.1:8200/v1/pipeline/lambda/data", body=payload, headers={'X-Vault-Request':'true'})
     f = open('/tmp/vault_secret.json',)
-    dataChange = json.load(f)
+    dataChanged = json.load(f)
     f.close()
 
 #re reade datetime kv val
@@ -26,13 +26,15 @@ def lambda_handler(event, context):
     dataNew = json.load(f)
     f.close()
 
-    print(date_update.data)
+
+    new_date = json.load(date_update.data)
+    print(new_date['data']['date'])
 
     return {
         'statusCode': 200,
         'message': message,
-        'request_id': dataOld['request_id'],
-        'dateOld': dataOld['data']['date'],
-        'dataChange': dataChange,
-        'dateNew': dataNew['data']['date']
+        'initialRequest_id': dataInitial['request_id'],
+        'date1stRead': dataInitial['data']['date'],
+        'date2ndRead': dataChanged['data']['date'],
+        'date3rdRead': dataNew['data']['date']
     }
